@@ -21,10 +21,10 @@ summamuuttuja <- function(sarakkeet, data, max_puuttuvat=1) {
 # b)
 asty <- read.csv2("asiakastyytyvaisyys.csv", stringsAsFactors = FALSE)
 
-asty$tyyt_kulj <- summamuuttuja(c('K1A1', 'K1A2', 'K1A3'), data=asty)
-quantile(asty$tyyt_kulj, na.rm=TRUE)
-mean(asty$tyyt_kulj)
-boxplot(asty$tyyt_kulj, col='red')
+asty$ty_kulj <- summamuuttuja(c('K1A1', 'K1A2', 'K1A3'), data=asty)
+quantile(asty$ty_kulj, na.rm=TRUE)
+mean(asty$ty_kulj)
+boxplot(asty$ty_kulj, col='red')
 
 
 # c)
@@ -82,5 +82,23 @@ lines(agg$x[,3]~agg$Group.1, col='green')
 
 ##### tehtävä 4. #####
 
+# a)
+plot(asty$ty~asty$ty_kulj, col='blue')
+
+# b)
+
+# c)
+
+# d)
+
+
 ##### tehtävä 5. #####
+
+# a)
+
+# b)
+
+# c)
+
+
 
