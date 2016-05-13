@@ -69,12 +69,12 @@ KeskiarvoJaVali <- function(data, m_taso=0.95) {
 }
 
 # c)
-L55.ty = tyytyvaisyys[asty$LINJA == 55]
+L55.ty <- tyytyvaisyys[asty$LINJA == 55]
 KeskiarvoJaVali(L55.ty, 0.95)
 
 # d)
-asty$ty = tyytyvaisyys
-agg = aggregate(x= asty$ty, by= list(asty$kk), FUN= KeskiarvoJaVali)
+asty$ty <- tyytyvaisyys
+agg <- aggregate(x= asty$ty, by= list(asty$kk), FUN= KeskiarvoJaVali)
 plot(agg$x[,1]~agg$Group.1, type='l', col='red')
 lines(agg$x[,2]~agg$Group.1, col='green')
 lines(agg$x[,3]~agg$Group.1, col='green')
@@ -86,17 +86,41 @@ lines(agg$x[,3]~agg$Group.1, col='green')
 plot(asty$ty~asty$ty_kulj, col='blue')
 
 # b)
+ty <- asty$ty + rnorm(asty$ty, mean= 0, sd= 0.2)
+ty_kulj <- asty$ty_kulj + rnorm(asty$ty_kulj, mean= 0, sd= 0.2)
+plot(ty~ty_kulj, col= 'blue', pch= '.', cex= 0.2)
 
 # c)
+fit <- lm(asty$ty~asty$ty_kulj)
+fit
 
 # d)
+curve(fit$coefficients[1] + fit$coefficients[2]*x, from= 1, to= 5.5, add= T, col= 'orange')
 
 
 ##### tehtävä 5. #####
 
 # a)
+thetasimu <- function(n) {
+    N <- 4 # palloja korisx/Na
+    nostoja <- 3 # nostojen määrä palautuksella
+    thetas <- floor(runif(n, 0, N+1))
+    nostetut_valkoiset <- sapply(thetas, function(x) rbinom(1, nostoja, x/N))
+    theta <- thetas[nostetut_valkoiset == 2]
+    prop.table(table(theta))
+}
+
 
 # b)
+thetasimu2 <- function(n, p= 0.5) {
+    N <- 4 # palloja korissa
+    nostoja <- 3 # nostojen määrä palautuksella
+    thetas <- floor(runif(n, 0, N+1))
+    nostetut_valkoiset <- sapply(thetas, function(x) rbinom(1, nostoja, x/N))
+    theta <- thetas[nostetut_valkoiset == 2]
+    prop.table(table(theta))
+}
+
 
 # c)
 
